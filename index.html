@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daniel Ionashku — Engineer, Builder, Problem Solver</title>
+  <meta name="description" content="Portfolio of Daniel Ionashku — Technical Support Engineer with 10+ years of experience, founder of Fivebags Inc., and builder of products that matter.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="#" class="nav__logo">DI</a>
+      <div class="nav__links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#toolstack">Toolstack</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#toolstack">Toolstack</a>
+    <a href="#contact">Contact</a>
+  </div>
+
+  <!-- Hero -->
+  <header class="hero" id="hero">
+    <div class="hero__content">
+      <p class="hero__label reveal">Engineer & Builder</p>
+      <h1 class="hero__title reveal">
+        Daniel<br>Ionashku
+      </h1>
+      <p class="hero__subtitle reveal">
+        Technical Support Engineer with 10+ years in SaaS.<br>
+        Founder. Developer. Relentless problem solver.
+      </p>
+      <div class="hero__cta reveal">
+        <a href="#projects" class="btn btn--primary">View Work</a>
+        <a href="#contact" class="btn btn--outline">Get in Touch</a>
+      </div>
+    </div>
+    <div class="hero__scroll">
+      <span>Scroll</span>
+      <div class="hero__scroll-line"></div>
+    </div>
+  </header>
+
+  <!-- About -->
+  <section class="section about" id="about">
+    <div class="container">
+      <div class="section__label reveal">About</div>
+      <div class="about__grid">
+        <div class="about__text">
+          <h2 class="about__heading reveal">
+            I build things that solve real problems and support the people who use them.
+          </h2>
+          <p class="about__body reveal">
+            Over the past decade, I've worked at the intersection of engineering and customer experience
+            at companies like Mixpanel, Atlassian, InVision, and Simple Finance. I've debugged complex
+            systems across cloud environments, REST APIs, and authentication protocols while keeping
+            the human on the other side at the center of every decision.
+          </p>
+          <p class="about__body reveal">
+            In 2023, I founded Fivebags, Inc. and started building products of my own &mdash; from
+            personal finance tools to life-planning apps to creative agency platforms. I write code
+            in JavaScript, Python, Vue.js, and React, and I ship on GCP and Firebase.
+          </p>
+        </div>
+        <div class="about__details reveal">
+          <div class="about__portrait">
+            <img src="img/profile.jpeg" alt="Daniel Ionashku" loading="lazy">
+          </div>
+          <div class="about__detail">
+            <span class="about__detail-label">Based in</span>
+            <span class="about__detail-value">Camas, WA (Remote)</span>
+          </div>
+          <div class="about__detail">
+            <span class="about__detail-label">Education</span>
+            <span class="about__detail-value">B.S. Computer Science &amp; Business Administration</span>
+          </div>
+          <div class="about__detail">
+            <span class="about__detail-label">Languages</span>
+            <span class="about__detail-value">English, Russian, Romanian</span>
+          </div>
+          <div class="about__detail">
+            <span class="about__detail-label">Company</span>
+            <span class="about__detail-value">Fivebags, Inc. (Founder)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section class="section skills" id="skills">
+    <div class="container">
+      <div class="section__label reveal">Expertise</div>
+      <h2 class="section__heading reveal">Core Skills</h2>
+      <div class="skills__grid">
+        <div class="skill-card reveal">
+          <div class="skill-card__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          </div>
+          <h3 class="skill-card__title">Troubleshooting & Debugging</h3>
+          <p class="skill-card__desc">REST APIs, logs, stack traces, browser dev tools. Root cause analysis across complex, distributed systems.</p>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-card__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <h3 class="skill-card__title">Auth & Security</h3>
+          <p class="skill-card__desc">SSO, SAML, OAuth, enterprise compliance. Securing applications and managing access at scale.</p>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-card__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+          </div>
+          <h3 class="skill-card__title">Cloud & SaaS</h3>
+          <p class="skill-card__desc">GCP, AWS, Azure. Building and supporting cloud-native applications, integrations, and automation pipelines.</p>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-card__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <h3 class="skill-card__title">Languages & Tools</h3>
+          <p class="skill-card__desc">JavaScript, Python, SQL, HTML/CSS, Vue.js, React, Firebase, GitHub, Jira, Confluence.</p>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-card__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l6-6-6-6"/><path d="M12 19h8"/></svg>
+          </div>
+          <h3 class="skill-card__title">Python & Scripting</h3>
+          <p class="skill-card__desc">Automation scripts, data processing, and tooling. Used Python to build scripts that recovered cryptocurrency funds from compromised wallets.</p>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-card__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <h3 class="skill-card__title">Search & Knowledge</h3>
+          <p class="skill-card__desc">SaaS search platforms, content ingestion, knowledge management systems. Google Workspace, Slack, Teams.</p>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-card__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <h3 class="skill-card__title">AI & LLMs</h3>
+          <p class="skill-card__desc">OpenAI APIs, GPT-based integrations, and Model Context Protocol (MCP). Building intelligent features that augment user experiences with AI.</p>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-card__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3 class="skill-card__title">Collaboration</h3>
+          <p class="skill-card__desc">Escalation management, cross-functional teamwork with engineering and product, mentoring, and technical documentation.</p>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-card__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
+          <h3 class="skill-card__title">Agile & QA</h3>
+          <p class="skill-card__desc">Agile and DevOps methodologies. QA testing, bug replication, and writing detailed reproduction steps for engineering teams.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience Timeline -->
+  <section class="section experience" id="experience">
+    <div class="container">
+      <div class="section__label reveal">Career</div>
+      <h2 class="section__heading reveal">Experience</h2>
+      <div class="timeline">
+
+        <div class="timeline__item reveal">
+          <div class="timeline__marker"></div>
+          <div class="timeline__date">Aug 2024 &mdash; Present</div>
+          <div class="timeline__content">
+            <h3 class="timeline__role">Support Engineer</h3>
+            <p class="timeline__company">Mixpanel</p>
+            <ul class="timeline__details">
+              <li>Product expert across reports, APIs, SDKs, and analytics best practices</li>
+              <li>Resolve complex account, configuration, and data issues via Zendesk and chat</li>
+              <li>Investigate and document bugs collaborating with Product and Engineering</li>
+              <li>Mentor new team members and contribute to knowledge base improvements</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline__item reveal">
+          <div class="timeline__marker"></div>
+          <div class="timeline__date">Feb 2022 &mdash; Aug 2024</div>
+          <div class="timeline__content">
+            <h3 class="timeline__role">Support Engineer T3</h3>
+            <p class="timeline__company">Atlassian</p>
+            <ul class="timeline__details">
+              <li>Troubleshot complex issues across Atlassian Cloud &mdash; APIs, automation, and integrations</li>
+              <li>Analyzed logs and traces to debug technical problems for enterprise customers</li>
+              <li>Escalation point for high-priority issues; partnered directly with engineering</li>
+              <li>Created runbooks and SOPs for bug resolutions and customer-specific compliance</li>
+              <li>Mentored junior engineers on troubleshooting and security protocols</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline__item reveal">
+          <div class="timeline__marker"></div>
+          <div class="timeline__date">Nov 2017 &mdash; Feb 2022</div>
+          <div class="timeline__content">
+            <h3 class="timeline__role">Senior T2 Support Engineer</h3>
+            <p class="timeline__company">InVision</p>
+            <ul class="timeline__details">
+              <li>Top-tier enterprise support &mdash; maintained CSAT/NPS in the top 5%</li>
+              <li>Triaged, debugged, and escalated bugs with actionable engineering insights</li>
+              <li>Authored technical documentation and QA-tested new product features</li>
+              <li>Assisted customers with SaaS integrations and configurations</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline__item reveal">
+          <div class="timeline__marker"></div>
+          <div class="timeline__date">2010 &mdash; 2017</div>
+          <div class="timeline__content">
+            <h3 class="timeline__role">Customer Relations Shift Lead & Early Roles</h3>
+            <p class="timeline__company">Simple Finance</p>
+            <ul class="timeline__details">
+              <li>Led a team of 10 support agents, achieving 35% increase in customer satisfaction</li>
+              <li>Managed on-call escalations, improving after-hours response by ~50% via automation</li>
+              <li>Resolved thousands of customer queries with a 98% satisfaction rate</li>
+              <li>Investigated and documented technical issues, streamlining escalations</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section class="section projects" id="projects">
+    <div class="container">
+      <div class="section__label reveal">Work</div>
+      <h2 class="section__heading reveal">Projects I've Built</h2>
+
+      <div class="project reveal">
+        <div class="project__layout">
+          <div class="project__info">
+            <div class="project__number">01</div>
+            <h3 class="project__title">FIYR</h3>
+            <p class="project__tagline">Personal finance meets financial independence.</p>
+            <p class="project__desc">
+              FIYR is a comprehensive financial management platform built for people pursuing
+              FIRE (Financial Independence, Retire Early). It connects to your bank accounts
+              via Plaid, automatically tracks spending, and projects your path to financial freedom.
+              Features include dynamic budgeting with daily safe-to-spend calculations, net worth tracking
+              across investments and liabilities, interactive Sankey cashflow diagrams, subscription
+              management, and an AI-powered assistant for querying your financial data.
+            </p>
+            <div class="project__tech">
+              <span>Vue.js</span>
+              <span>React</span>
+              <span>Firebase</span>
+              <span>GCP</span>
+              <span>Plaid API</span>
+              <span>OpenAI API</span>
+            </div>
+            <a href="https://fiyr.app" class="project__link" target="_blank" rel="noopener">Visit fiyr.app &rarr;</a>
+          </div>
+          <div class="project__preview">
+            <div class="browser-frame">
+              <div class="browser-frame__bar">
+                <span class="browser-frame__dot"></span>
+                <span class="browser-frame__dot"></span>
+                <span class="browser-frame__dot"></span>
+                <span class="browser-frame__url">fiyr.app</span>
+              </div>
+              <div class="browser-frame__body">
+                <img src="img/fiyr.png" alt="FIYR app screenshot" loading="lazy">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project reveal">
+        <div class="project__layout project__layout--reverse">
+          <div class="project__info">
+            <div class="project__number">02</div>
+            <h3 class="project__title">4160 Life</h3>
+            <p class="project__tagline">Visualize your life. One week at a time.</p>
+            <p class="project__desc">
+              Inspired by the idea that the average human life spans roughly 4,160 weeks, this
+              Chrome extension turns that concept into a personal planning tool. It generates a visual
+              "life grid" based on your date of birth, letting you see exactly where you are in
+              your life at a glance. Beyond the grid, it includes daily habit tracking, weekly
+              todos with progress monitoring, and weekly summaries for reflection. Built with
+              Firebase auth and Cloud Firestore for secure, private data storage.
+            </p>
+            <div class="project__tech">
+              <span>JavaScript</span>
+              <span>Chrome Extension</span>
+              <span>Firebase</span>
+              <span>Firestore</span>
+            </div>
+            <a href="https://4160.life" class="project__link" target="_blank" rel="noopener">Visit 4160.life &rarr;</a>
+          </div>
+          <div class="project__preview">
+            <div class="browser-frame">
+              <div class="browser-frame__bar">
+                <span class="browser-frame__dot"></span>
+                <span class="browser-frame__dot"></span>
+                <span class="browser-frame__dot"></span>
+                <span class="browser-frame__url">4160.life</span>
+              </div>
+              <div class="browser-frame__body">
+                <img src="img/4160life.png" alt="4160 Life app screenshot" loading="lazy">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project reveal">
+        <div class="project__layout">
+          <div class="project__info">
+            <div class="project__number">03</div>
+            <h3 class="project__title">The Crystal Creative</h3>
+            <p class="project__tagline">A custom-built site for a Portland music agency.</p>
+            <p class="project__desc">
+              I designed and developed the website for The Crystal Creative, an award-winning
+              Portland-based music agency specializing in custom composition, sound design, and
+              music supervision. The build is a polished, responsive WordPress site featuring a
+              custom dark/light theme system, video modals, Mixpanel analytics integration, and
+              performance-optimized link prefetching. The design prioritizes clean aesthetics
+              and smooth interactions to match the agency's creative identity.
+            </p>
+            <div class="project__tech">
+              <span>WordPress</span>
+              <span>JavaScript</span>
+              <span>CSS</span>
+              <span>Mixpanel</span>
+              <span>Responsive Design</span>
+            </div>
+            <a href="https://thecrystalcreative.com" class="project__link" target="_blank" rel="noopener">Visit thecrystalcreative.com &rarr;</a>
+          </div>
+          <div class="project__preview">
+            <div class="browser-frame">
+              <div class="browser-frame__bar">
+                <span class="browser-frame__dot"></span>
+                <span class="browser-frame__dot"></span>
+                <span class="browser-frame__dot"></span>
+                <span class="browser-frame__url">thecrystalcreative.com</span>
+              </div>
+              <div class="browser-frame__body">
+                <img src="img/tcc.png" alt="The Crystal Creative website screenshot" loading="lazy">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project reveal">
+        <div class="project__layout project__layout--reverse">
+          <div class="project__info">
+            <div class="project__number">04</div>
+            <h3 class="project__title">The ION Group</h3>
+            <p class="project__tagline">A web agency built to help businesses stand out.</p>
+            <p class="project__desc">
+              The ION Group is my web design and development agency. We build responsive,
+              custom-coded websites for businesses that understand their digital presence matters.
+              The agency site itself reflects the philosophy &mdash; clean design, strong typography,
+              and data-driven messaging around why web quality converts. Services include responsive
+              design, custom interactive features, SEO optimization, branding, and ongoing maintenance.
+            </p>
+            <div class="project__tech">
+              <span>Web Design</span>
+              <span>Custom Development</span>
+              <span>SEO</span>
+              <span>Branding</span>
+              <span>Hosting</span>
+            </div>
+            <a href="https://theiongroup.co/" class="project__link" target="_blank" rel="noopener">Visit theiongroup.co &rarr;</a>
+          </div>
+          <div class="project__preview">
+            <div class="browser-frame">
+              <div class="browser-frame__bar">
+                <span class="browser-frame__dot"></span>
+                <span class="browser-frame__dot"></span>
+                <span class="browser-frame__dot"></span>
+                <span class="browser-frame__url">theiongroup.co</span>
+              </div>
+              <div class="browser-frame__body">
+                <img src="img/iongroup.png" alt="The ION Group website screenshot" loading="lazy">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project reveal">
+        <div class="project__layout">
+          <div class="project__info">
+            <div class="project__number">05</div>
+            <h3 class="project__title">Velocity German Autos</h3>
+            <p class="project__tagline">A digital showroom for a family-owned dealership.</p>
+            <p class="project__desc">
+              I built the website for Velocity German Autos, a family-owned Portland dealership
+              specializing in classic and contemporary European cars &mdash; BMWs, Porsches,
+              Mercedes-Benz, and more. The site features vehicle inventory management with
+              detailed listings, a loan calculator, credit application portal, test drive scheduling,
+              and trade-in evaluations. Designed to feel premium and match the quality of the
+              cars on the lot.
+            </p>
+            <div class="project__tech">
+              <span>Web Development</span>
+              <span>Responsive Design</span>
+              <span>Inventory System</span>
+              <span>Finance Tools</span>
+            </div>
+            <a href="https://www.velocitygermanautos.com/" class="project__link" target="_blank" rel="noopener">Visit velocitygermanautos.com &rarr;</a>
+          </div>
+          <div class="project__preview">
+            <div class="browser-frame">
+              <div class="browser-frame__bar">
+                <span class="browser-frame__dot"></span>
+                <span class="browser-frame__dot"></span>
+                <span class="browser-frame__dot"></span>
+                <span class="browser-frame__url">velocitygermanautos.com</span>
+              </div>
+              <div class="browser-frame__body">
+                <img src="img/velocity.png" alt="Velocity German Autos website screenshot" loading="lazy">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Toolstack -->
+  <section class="section toolstack" id="toolstack">
+    <div class="container">
+      <div class="section__label reveal">Setup</div>
+      <h2 class="section__heading reveal">How I Work</h2>
+      <p class="toolstack__intro reveal">
+        I prefer working close to the metal. Terminal-first, keyboard-driven, minimal distractions.
+      </p>
+      <div class="toolstack__grid">
+        <div class="toolstack__item reveal">
+          <h3 class="toolstack__name">Claude Code</h3>
+          <p class="toolstack__desc">My primary coding partner. I prefer working directly from the terminal with AI-assisted development.</p>
+        </div>
+        <div class="toolstack__item reveal">
+          <h3 class="toolstack__name">Warp</h3>
+          <p class="toolstack__desc">Modern terminal that keeps my workflow fast and organized.</p>
+        </div>
+        <div class="toolstack__item reveal">
+          <h3 class="toolstack__name">Alfred</h3>
+          <p class="toolstack__desc">App launcher, clipboard manager, and workflow automation. The command center for everything on my Mac.</p>
+        </div>
+        <div class="toolstack__item reveal">
+          <h3 class="toolstack__name">Wispr Flow</h3>
+          <p class="toolstack__desc">Voice-to-text that lets me think out loud and move faster than typing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Personal -->
+  <section class="section personal" id="personal">
+    <div class="container">
+      <div class="section__label reveal">Off the Clock</div>
+      <h2 class="section__heading reveal">Beyond the Screen</h2>
+      <div class="personal__grid">
+        <div class="personal__item reveal">
+          <div class="personal__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <h3 class="personal__title">Travel</h3>
+          <p class="personal__desc">
+            I love exploring new places and cultures. Traveling gives me perspective,
+            recharges creativity, and keeps me curious about how the rest of the world works.
+          </p>
+        </div>
+        <div class="personal__item reveal">
+          <div class="personal__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          </div>
+          <h3 class="personal__title">Photography</h3>
+          <p class="personal__desc">
+            Whether it's street photography, landscapes, or candid moments while traveling,
+            I'm drawn to capturing the world through a lens. It sharpens the way I see detail and composition &mdash; skills that carry over into design.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section contact" id="contact">
+    <div class="container">
+      <div class="contact__inner reveal">
+        <div class="section__label">Connect</div>
+        <h2 class="contact__heading">Let's work together.</h2>
+        <p class="contact__text">
+          I'm open to new opportunities, collaborations, and interesting conversations.
+        </p>
+        <div class="contact__links">
+          <a href="mailto:daniel.ionashku@gmail.com" class="contact__link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            daniel.ionashku@gmail.com
+          </a>
+          <a href="https://www.linkedin.com/in/danielionashku/" class="contact__link" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+          <a href="https://github.com/danielionashku" class="contact__link" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Daniel Ionashku. Built from scratch.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
