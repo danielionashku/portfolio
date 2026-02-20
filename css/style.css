@@ -26,6 +26,33 @@
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
 }
 
+/* ===========================
+   Cube Background
+   =========================== */
+#cubeBg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.35;
+}
+
+body {
+  position: relative;
+}
+
+.nav,
+.hero,
+.section,
+.footer,
+.mobile-menu {
+  position: relative;
+  z-index: 1;
+}
+
 /* Reset */
 *, *::before, *::after {
   margin: 0;
