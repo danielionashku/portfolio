@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#03200f"/>
+      <stop offset=".35" stop-color="#0a4a1f"/>
+      <stop offset=".6" stop-color="#16692a"/>
+      <stop offset=".85" stop-color="#0a3f4a"/>
+      <stop offset="1" stop-color="#041d33"/>
+    </linearGradient>
+    <radialGradient id="glow" cx=".42" cy=".6" r=".55">
+      <stop offset="0" stop-color="#8be35a" stop-opacity=".55"/>
+      <stop offset=".5" stop-color="#2f9a3a" stop-opacity=".25"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="streak" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#d9ffb0" stop-opacity="0"/>
+      <stop offset=".35" stop-color="#e9ffd0" stop-opacity=".95"/>
+      <stop offset=".6" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="1" stop-color="#9fffd0" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="streak2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#6fe6c0" stop-opacity="0"/>
+      <stop offset=".5" stop-color="#b8ffe6" stop-opacity=".8"/>
+      <stop offset="1" stop-color="#4fb0ff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="b40" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="40"/></filter>
+    <filter id="b14" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="14"/></filter>
+    <filter id="b4" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="3.5"/></filter>
+    <filter id="b1" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="1"/></filter>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+  <rect width="1600" height="1000" fill="url(#glow)"/>
+  <!-- broad soft bands -->
+  <path d="M-100 760 C 300 520, 700 640, 1000 470 S 1500 240, 1750 300" stroke="#7ee05a" stroke-opacity=".45" stroke-width="180" fill="none" filter="url(#b40)"/>
+  <path d="M-100 860 C 350 700, 760 760, 1080 600 S 1500 420, 1750 470" stroke="#2ec0a0" stroke-opacity=".35" stroke-width="140" fill="none" filter="url(#b40)"/>
+  <!-- medium glows -->
+  <path d="M-50 720 C 320 560, 680 650, 980 500 S 1450 280, 1700 330" stroke="url(#streak)" stroke-opacity=".7" stroke-width="46" fill="none" filter="url(#b14)"/>
+  <path d="M-50 800 C 360 660, 720 720, 1040 580 S 1480 380, 1700 430" stroke="url(#streak2)" stroke-opacity=".6" stroke-width="34" fill="none" filter="url(#b14)"/>
+  <!-- crisp light ribbons -->
+  <path d="M0 725 C 330 570, 690 655, 985 505 S 1450 290, 1650 335" stroke="url(#streak)" stroke-width="7" fill="none" filter="url(#b4)"/>
+  <path d="M0 725 C 330 570, 690 655, 985 505 S 1450 290, 1650 335" stroke="#fff" stroke-opacity=".9" stroke-width="1.6" fill="none" filter="url(#b1)"/>
+  <path d="M60 760 C 380 620, 700 690, 1010 548 S 1470 335, 1650 380" stroke="url(#streak)" stroke-opacity=".75" stroke-width="3" fill="none" filter="url(#b1)"/>
+  <path d="M120 805 C 420 680, 740 735, 1050 590 S 1490 400, 1660 440" stroke="url(#streak2)" stroke-width="4" fill="none" filter="url(#b4)"/>
+  <path d="M200 690 C 480 560, 760 620, 1000 480 S 1400 300, 1600 300" stroke="url(#streak2)" stroke-opacity=".6" stroke-width="2" fill="none" filter="url(#b1)"/>
+  <!-- sparkles -->
+  <g fill="#fff">
+    <circle cx="985" cy="505" r="3" filter="url(#b1)"/><circle cx="985" cy="505" r="22" opacity=".25" filter="url(#b14)"/>
+    <circle cx="640" cy="640" r="2" opacity=".8"/><circle cx="1240" cy="395" r="2.4" opacity=".8"/><circle cx="420" cy="660" r="1.6" opacity=".6"/>
+  </g>
+</svg>
