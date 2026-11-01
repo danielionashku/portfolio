@@ -350,17 +350,23 @@ window.DV = {
    "name": "Vesper",
    "tagline": "Talk to Claude Code hands-free. Say \"okay go\" and it acts.",
    "description": "I built Vesper, a hands-free voice layer over Claude Code that lives as a glowing reactor in the corner of my Mac. I just talk, end with \"okay go\", and it answers out loud while the core reacts to its own voice. It can see every Claude session I have running, read their screens and type into them, but only after I say yes. I got the time to the first spoken word from about 8 seconds down to about 1.7.",
-   "status": "In development (demo coming)",
+   "status": "In development",
    "category": "app",
    "url": "",
    "icon": "assets/vesper/icon.png",
    "screenshots": [
-    "assets/vesper/speaking.jpg",
-    "assets/vesper/listening.jpg",
-    "assets/vesper/thinking.jpg",
-    "assets/vesper/idle.jpg"
+    "assets/vesper/shot-full.jpg",
+    "assets/vesper/shot-grid.jpg",
+    "assets/vesper/shot-confirm.jpg",
+    "assets/vesper/shot-session.jpg",
+    "assets/vesper/speaking.jpg"
    ],
    "videos": [
+    {
+     "src": "assets/vesper/demo.mp4",
+     "poster": "assets/vesper/demo-poster.jpg",
+     "title": "Vesper demo with sound (1:13, scripted, sample data)"
+    },
     {
      "src": "assets/vesper/reactor.mp4",
      "poster": "assets/vesper/reactor-poster.jpg",
@@ -1570,19 +1576,27 @@ window.DV = {
    512,
    512
   ],
+  "assets/vesper/shot-full.jpg": [
+   1536,
+   864
+  ],
+  "assets/vesper/shot-grid.jpg": [
+   1536,
+   864
+  ],
+  "assets/vesper/shot-confirm.jpg": [
+   1536,
+   864
+  ],
+  "assets/vesper/shot-session.jpg": [
+   1536,
+   864
+  ],
   "assets/vesper/speaking.jpg": [
    1280,
    720
   ],
-  "assets/vesper/listening.jpg": [
-   1280,
-   720
-  ],
-  "assets/vesper/thinking.jpg": [
-   1280,
-   720
-  ],
-  "assets/vesper/idle.jpg": [
+  "assets/vesper/demo-poster.jpg": [
    1280,
    720
   ],
