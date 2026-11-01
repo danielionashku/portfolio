@@ -8,13 +8,13 @@ about = next(r for r in rows if r['slug'] == 'about')
 # Held back from the public site: scarlett-creative is unlaunched agency work (needs Working Hours' OK first).
 HIDDEN = {'scarlett-creative'}
 projects = [r for r in rows if r['slug'] != 'about' and r['slug'] not in HIDDEN]
-SOT = 'assets/scroll-of-time/'
+BIBLE = 'assets/bible-history/'
 
 OV = {
   'fiyr': dict(theme='#0f6b4f', kindLabel='Personal finance app', year='2023–now', device='assets/fiyr/ios.png', deviceCaption='FIYR on iPhone (demo data)'),
   'lifegrid': dict(name='4160', theme='#1f2a44', kindLabel='Life planner app', year='2023–now'),
-  'scroll-of-time': dict(theme='#6b4a1f', kindLabel='Interactive Bible history',
-    videos=[dict(src=SOT+'tour.mp4', poster=SOT+'tour-poster.jpg', title="Scroll of Time tour: intro, timeline and Paul's first journey")]),
+  'bible-history': dict(theme='#6b4a1f', kindLabel='Interactive Bible history',
+    videos=[dict(src=BIBLE+'tour.mp4', poster=BIBLE+'tour-poster.jpg', title="Bible History tour: intro, timeline and Paul's first journey")]),
   # The landing-page clip was 12s of a static page; shot1 is the hero until a real walkthrough exists.
   'what-we-preach': dict(theme='#3b2d6b', kindLabel='Sermon analytics', glyph='chart', videos=[]),
   'reel-camera': dict(name='Reel Camera', theme='#3a2a1a', kindLabel='iPhone app', status='Beta (TestFlight)', url='https://reel-camera.web.app',
@@ -63,13 +63,13 @@ for p in projects:
     if not p.get('icon'): p['icon'] = None
 
 # Featured projects first: the desktop slideshow and Media Player start from the top of this list.
-FEAT = ['fiyr','lifegrid','scroll-of-time','what-we-preach','reel-camera','vesper','founders-realm']
+FEAT = ['fiyr','lifegrid','bible-history','what-we-preach','reel-camera','vesper','founders-realm']
 projects.sort(key=lambda p: FEAT.index(p['slug']) if p['slug'] in FEAT else len(FEAT))
 
 slugs = {p['slug'] for p in projects}
 def keep(lst): return [s for s in lst if s in slugs]
 folders = {
-  'Apps': dict(name='Apps', icon='folderApps', items=keep(['fiyr','lifegrid','scroll-of-time','what-we-preach','reel-camera','vesper','world','reel-editor'])),
+  'Apps': dict(name='Apps', icon='folderApps', items=keep(['fiyr','lifegrid','bible-history','what-we-preach','reel-camera','vesper','world','reel-editor'])),
   'Websites': dict(name='Websites (Groundwork)', icon='folderWeb', items=keep(['groundwork','velocity-german-autos','classics-for-weddings','highland-glass','north-bank-tree','pro-tile-marble','rose-manor-afh','the-order-music','crystal-creative','paradigm-coffee'])),
   'Tools': dict(name='Tools & Agents', icon='folderTools', items=keep(['reel-replicator','power-dialer','demo-video','mission-control','chief-of-staff','pulse','symbis'])),
   'Games': dict(name='Games & Experiments', icon='folderGames', items=keep(['founders-realm','kingdom-feud','side-quests','cafe-automne-3d','lofi-rooms'])),
@@ -88,7 +88,7 @@ A = dict(
   links=[dict(label='GitHub', url='https://github.com/danielionashku'), dict(label='LinkedIn', url='https://www.linkedin.com/in/danielionashku/'), dict(label='Email', url='mailto:daniel.ionashku@gmail.com'), dict(label='Groundwork', url='https://groundwork-studio.web.app')],
   bio=["I build things I'm curious about, usually somewhere between data, visuals, and something no one asked for.",
        "By day I work in support engineering, currently at Mixpanel and before that Atlassian and InVision, after starting out in customer support at Simple Finance. I debug systems, untangle APIs and dig into the problems most people avoid.",
-       "What drives me is making things. In 2023 I founded Fivebags, Inc. and started shipping my own ideas: FIYR, 4160, Scroll of Time, What We Preach, a Super 8 camera app, a voice assistant, and a lot of websites through Groundwork, my AI automation studio. These days Claude Code is my co-pilot for almost all of it.",
+       "What drives me is making things. In 2023 I founded Fivebags, Inc. and started shipping my own ideas: FIYR, 4160, Bible History, What We Preach, a Super 8 camera app, a voice assistant, and a lot of websites through Groundwork, my AI automation studio. These days Claude Code is my co-pilot for almost all of it.",
        "I also love analog things: film, paper, things with weight. That pull between modern tooling and older, slower formats is where most of my ideas come from. (Hence this whole desktop.)"],
   now=['Shipping FIYR and 4160 on web, iPhone and Apple Watch','Building Groundwork: websites + AI automation for small businesses','Finishing Reel Camera and Vesper'],
   experience=[dict(role=e['role'], company=e['company'], dates=e['dates'], summary=e['line']) for e in exp],
@@ -98,8 +98,8 @@ A = dict(
 )
 DV = dict(
   about=A, projects=projects, folders=folders, folderOrder=list(folders.keys()),
-  desktop=keep(['fiyr','lifegrid','scroll-of-time','what-we-preach','reel-camera','vesper','founders-realm','power-dialer','reel-replicator','groundwork']),
-  featured=keep(['fiyr','lifegrid','scroll-of-time','what-we-preach','reel-camera','vesper','founders-realm']),
+  desktop=keep(['fiyr','lifegrid','bible-history','what-we-preach','reel-camera','vesper','founders-realm','power-dialer','reel-replicator','groundwork']),
+  featured=keep(['fiyr','lifegrid','bible-history','what-we-preach','reel-camera','vesper','founders-realm']),
   # Hosts that refuse to be framed (X-Frame-Options / frame-ancestors). audit_media.py --net re-checks these.
   noFrame=['fiyr.app','paradigmcoffeeco.com'],
   notes=dict(

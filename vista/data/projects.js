@@ -28,7 +28,7 @@ window.DV = {
   "bio": [
    "I build things I'm curious about, usually somewhere between data, visuals, and something no one asked for.",
    "By day I work in support engineering, currently at Mixpanel and before that Atlassian and InVision, after starting out in customer support at Simple Finance. I debug systems, untangle APIs and dig into the problems most people avoid.",
-   "What drives me is making things. In 2023 I founded Fivebags, Inc. and started shipping my own ideas: FIYR, 4160, Scroll of Time, What We Preach, a Super 8 camera app, a voice assistant, and a lot of websites through Groundwork, my AI automation studio. These days Claude Code is my co-pilot for almost all of it.",
+   "What drives me is making things. In 2023 I founded Fivebags, Inc. and started shipping my own ideas: FIYR, 4160, Bible History, What We Preach, a Super 8 camera app, a voice assistant, and a lot of websites through Groundwork, my AI automation studio. These days Claude Code is my co-pilot for almost all of it.",
    "I also love analog things: film, paper, things with weight. That pull between modern tooling and older, slower formats is where most of my ideas come from. (Hence this whole desktop.)"
   ],
   "now": [
@@ -219,29 +219,29 @@ window.DV = {
    "year": "2023–now"
   },
   {
-   "slug": "scroll-of-time",
-   "name": "Scroll of Time",
+   "slug": "bible-history",
+   "name": "Bible History",
    "tagline": "The whole Bible story on one zoomable timeline, from the Pyramids to Nicaea.",
    "description": "I built a zoomable timeline of biblical and early-church history: 200+ events in lanes, empires and eras underneath, and a library of 534 people from Adam onward. Click anything and a drawer opens with Scripture links, a map and related events. Then I kept going: animated journey maps (Abraham, the Exodus, all of Paul's trips), Jerusalem through 12 eras on real terrain, measured 3D models of the Tabernacle and Ezekiel's Temple, a WEB Bible reader with reading plans, and 'Life in the period', a 3D Capernaum at dawn where fishermen haul in the dragnet.",
    "status": "Live",
    "category": "app",
    "url": "https://biblehistory.app",
-   "icon": "assets/scroll-of-time/icon.png",
+   "icon": "assets/bible-history/icon.png",
    "screenshots": [
-    "assets/scroll-of-time/shot1.jpg",
-    "assets/scroll-of-time/shot2.jpg",
-    "assets/scroll-of-time/shot3.jpg",
-    "assets/scroll-of-time/shot4.jpg",
-    "assets/scroll-of-time/extra-buildings.jpg",
-    "assets/scroll-of-time/extra-jerusalem.jpg",
-    "assets/scroll-of-time/extra-people.jpg",
-    "assets/scroll-of-time/extra-phone.jpg"
+    "assets/bible-history/shot1.jpg",
+    "assets/bible-history/shot2.jpg",
+    "assets/bible-history/shot3.jpg",
+    "assets/bible-history/shot4.jpg",
+    "assets/bible-history/extra-buildings.jpg",
+    "assets/bible-history/extra-jerusalem.jpg",
+    "assets/bible-history/extra-people.jpg",
+    "assets/bible-history/extra-phone.jpg"
    ],
    "videos": [
     {
-     "src": "assets/scroll-of-time/tour.mp4",
-     "poster": "assets/scroll-of-time/tour-poster.jpg",
-     "title": "Scroll of Time tour: intro, timeline and Paul's first journey"
+     "src": "assets/bible-history/tour.mp4",
+     "poster": "assets/bible-history/tour-poster.jpg",
+     "title": "Bible History tour: intro, timeline and Paul's first journey"
     }
    ],
    "stack": [
@@ -1281,7 +1281,7 @@ window.DV = {
    "items": [
     "fiyr",
     "lifegrid",
-    "scroll-of-time",
+    "bible-history",
     "what-we-preach",
     "reel-camera",
     "vesper",
@@ -1339,7 +1339,7 @@ window.DV = {
  "desktop": [
   "fiyr",
   "lifegrid",
-  "scroll-of-time",
+  "bible-history",
   "what-we-preach",
   "reel-camera",
   "vesper",
@@ -1351,7 +1351,7 @@ window.DV = {
  "featured": [
   "fiyr",
   "lifegrid",
-  "scroll-of-time",
+  "bible-history",
   "what-we-preach",
   "reel-camera",
   "vesper",
@@ -1488,47 +1488,47 @@ window.DV = {
    1280,
    720
   ],
-  "assets/scroll-of-time/icon.png": [
-   256,
-   256
+  "assets/bible-history/icon.png": [
+   512,
+   512
   ],
-  "assets/scroll-of-time/shot1.jpg": [
+  "assets/bible-history/shot1.jpg": [
    1600,
    1000
   ],
-  "assets/scroll-of-time/shot2.jpg": [
+  "assets/bible-history/shot2.jpg": [
    1600,
    1000
   ],
-  "assets/scroll-of-time/shot3.jpg": [
+  "assets/bible-history/shot3.jpg": [
    1600,
    1000
   ],
-  "assets/scroll-of-time/shot4.jpg": [
+  "assets/bible-history/shot4.jpg": [
    1600,
    1000
   ],
-  "assets/scroll-of-time/extra-buildings.jpg": [
+  "assets/bible-history/extra-buildings.jpg": [
    1600,
    1000
   ],
-  "assets/scroll-of-time/extra-jerusalem.jpg": [
+  "assets/bible-history/extra-jerusalem.jpg": [
    1600,
    1000
   ],
-  "assets/scroll-of-time/extra-people.jpg": [
+  "assets/bible-history/extra-people.jpg": [
    1600,
    1000
   ],
-  "assets/scroll-of-time/extra-phone.jpg": [
+  "assets/bible-history/extra-phone.jpg": [
    739,
    1600
   ],
-  "assets/scroll-of-time/tour.mp4": [
+  "assets/bible-history/tour.mp4": [
    1280,
    720
   ],
-  "assets/scroll-of-time/tour-poster.jpg": [
+  "assets/bible-history/tour-poster.jpg": [
    1280,
    720
   ],
