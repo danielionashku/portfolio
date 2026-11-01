@@ -223,3 +223,31 @@
   .proj .toolbar { height: auto; flex-wrap: wrap; overflow: visible; row-gap: 2px; padding: 3px 6px; }
   .proj .toolbar a.tb-btn[target=_blank], .proj .toolbar .tb-sep { display: none; }
 }
+
+/* ---------- Program details: device photo + web button ---------- */
+.pj-device { margin: 12px 0 4px; text-align: center; }
+.pj-device img { width: 120px; height: auto; display: block; margin: 0 auto; cursor: zoom-in; filter: drop-shadow(0 4px 8px rgba(0,0,0,.35)); transition: transform .15s; }
+.pj-device img:hover { transform: scale(1.04); }
+.pj-device figcaption { font-size: 11px; color: #6d6d6d; margin-top: 4px; }
+.pj-openweb { width: 100%; height: 28px; margin-top: 12px; display: flex; align-items: center; justify-content: center; gap: 6px; }
+.pj-openweb svg { width: 16px; height: 16px; }
+.pj-newtab { display: block; text-align: center; font-size: 11px; margin-top: 5px; }
+.pj-nolink { margin-top: 10px; font-size: 11px; color: #6d6d6d; line-height: 1.4; }
+
+/* ---------- Notepad: user documents ---------- */
+.np-bar { flex: none; display: flex; align-items: center; gap: 10px; justify-content: space-between; padding: 5px 8px; background: linear-gradient(#fffbe6, #fff2bf); border-top: 1px solid #e3cf7d; font-size: 11.5px; color: #5a4a10; }
+.np-bar > span { display: flex; align-items: center; gap: 6px; min-width: 0; }
+.np-bar svg { width: 16px; height: 16px; flex: none; }
+.np-bar .vbtn { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; }
+
+/* ---------- Dialogs ---------- */
+.dlg-bar { margin-top: auto; display: flex; align-items: center; justify-content: flex-end; gap: 8px; padding: 10px 12px; background: #f0f0f0; border-top: 1px solid #dfdfdf; }
+.dlg-bar .s-status { margin-right: auto; font-size: 11.5px; display: flex; align-items: center; gap: 6px; }
+.send-dlg { flex: 1; min-height: 0; overflow: auto; position: relative; }
+.send-head { display: flex; gap: 10px; align-items: flex-start; }
+.send-head svg { width: 32px; height: 32px; flex: none; }
+.send-prev { max-height: 80px; overflow: auto; padding: 6px 8px; background: #f7f9fc; border: 1px solid #d5dde8; font: 12px/1.4 Consolas, Menlo, monospace; white-space: pre-wrap; color: #333; }
+.spinner.sm { width: 12px; height: 12px; border-width: 2px; border-color: rgba(0,0,0,.15); border-top-color: #2d7bd6; display: inline-block; }
+#icons.resorting .dicon { opacity: 0; transform: scale(.85); }
+#icons .dicon { transition: opacity .14s, transform .14s; }
+.send-dlg .m-fields { grid-template-columns: 78px 1fr; }

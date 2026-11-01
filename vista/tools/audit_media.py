@@ -24,6 +24,7 @@ DV = json.loads(js[js.index('{'):js.rstrip().rstrip(';').rindex('}') + 1])
 refs = []
 for p in DV['projects']:
     if p.get('icon'): refs.append((p['slug'], 'icon', p['icon']))
+    if p.get('device'): refs.append((p['slug'], 'device', p['device']))
     for s in p['screenshots']: refs.append((p['slug'], 'shot', s))
     for v in p['videos']:
         refs.append((p['slug'], 'video', v['src']))

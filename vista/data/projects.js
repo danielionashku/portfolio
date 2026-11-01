@@ -170,7 +170,9 @@ window.DV = {
    "fun_fact": "All three FIYR films are code, not video editing. Each one is a single HTML page that draws every frame in SVG and composes its own soundtrack in the browser. I rendered them to mp4 frame by frame.",
    "theme": "#0f6b4f",
    "kindLabel": "Personal finance app",
-   "year": "2023–now"
+   "year": "2023–now",
+   "device": "assets/fiyr/ios.png",
+   "deviceCaption": "FIYR on iPhone (demo data)"
   },
   {
    "slug": "lifegrid",
@@ -393,7 +395,7 @@ window.DV = {
    "name": "Founder's Realm",
    "tagline": "My whole AI operation, rebuilt as a walkable 3D medieval kingdom.",
    "description": "I built a three.js kingdom where every automation and Claude session I run shows up as a living thing: jobs work inside rooms you can walk into, agents roam the streets, and problems turn up as petitioners in the throne room. It has a castle you can walk through, a market square, a harbor, a golf course with golfers playing rounds, weather, a day/night cycle, photo mode and spoken NPC voices. I also wrapped it in a native Mac app so it opens like a game.",
-   "status": "Internal tool",
+   "status": "Mac app (private build)",
    "category": "game",
    "url": "",
    "icon": "assets/founders-realm/icon.png",
@@ -403,6 +405,11 @@ window.DV = {
     "assets/founders-realm/shot3.jpg"
    ],
    "videos": [
+    {
+     "src": "assets/founders-realm/teaser.mp4",
+     "poster": "assets/founders-realm/teaser-poster.jpg",
+     "title": "Founder's Realm teaser (0:46)"
+    },
     {
      "src": "assets/founders-realm/realm-tour.mp4",
      "poster": "assets/founders-realm/realm-tour-poster.jpg",
@@ -426,7 +433,7 @@ window.DV = {
     "Native Mac app wrapper with its own icon and menus",
     "Performance work: chunked instancing, BatchedMesh vegetation, merged character meshes"
    ],
-   "fun_fact": "It took four tries: v1 was a static map (his review: \"lol no\"), v2 was a 2D canvas (\"pixelated\"), then procedural three.js, then pro CC0 art kits.",
+   "fun_fact": "It took four tries: a static map, then a pixelated 2D canvas, then procedural three.js, and finally hand-placed CC0 art kits. Version four is the one that felt like a real kingdom.",
    "glyph": "castle",
    "theme": "#3d5a2a",
    "kindLabel": "3D game"
@@ -1602,6 +1609,10 @@ window.DV = {
   "assets/founders-realm/shot3.jpg": [
    1360,
    960
+  ],
+  "assets/founders-realm/teaser-poster.jpg": [
+   1280,
+   720
   ],
   "assets/founders-realm/realm-tour.mp4": [
    1280,

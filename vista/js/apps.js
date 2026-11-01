@@ -50,7 +50,7 @@
   const itemView = (it) => {
     switch (it.type) {
       case 'folder': { const f = FS[it.id]; const n = f.items().length; return { name: f.name, icon: OS.iconHTML(f.icon), sub: `${n} item${n === 1 ? '' : 's'}`, kind: 'File Folder', open: (win) => win.nav(it.id) }; }
-      case 'project': { const p = it.p; return { name: p.name, icon: p.icon ? `<img class="app" src="${esc(p.icon)}" alt="">` : (shotOf(p) ? `<img class="shot" src="${esc(shotOf(p))}" alt="">` : ICON(p.glyph || 'globe')), sub: p.status, kind: p.kindLabel || 'Application', detail: p.tagline, open: () => OS.open('project', { slug: p.slug }), menu: p.url ? [{ label: 'Visit ' + hostOf(p.url), act: () => OS.open('browser', { url: p.url }) }] : [] }; }
+      case 'project': { const p = it.p; return { name: p.name, icon: p.icon ? `<img class="app" src="${esc(p.icon)}" alt="">` : (shotOf(p) ? `<img class="shot" src="${esc(shotOf(p))}" alt="">` : ICON(p.glyph || 'globe')), sub: p.status, kind: p.kindLabel || 'Application', detail: p.tagline, open: () => OS.open('project', { slug: p.slug }), menu: p.url ? [{ label: 'Open in web browser', icon: 'globe', act: () => OS.open('browser', { url: p.url }) }] : [] }; }
       case 'video': { const v = it.video; return { name: v.title || v.project.name, icon: v.poster ? `<img class="shot" src="${esc(v.poster)}" alt=""><span class="play">▶</span>` : ICON('film'), sub: v.project.name, kind: 'Video Clip', open: () => OS.open('media', { src: v.src }) }; }
       case 'picture': { const s = it.shot; return { name: s.project.name + ' ' + (it.i + 1), icon: `<img class="shot" src="${esc(s.src)}" alt="">`, sub: 'Screenshot', kind: 'JPEG Image', open: () => OS.open('photos', { src: s.src }) }; }
       case 'shortcut': { const d = it.d; return { name: d.label, icon: d.thumb ? `<img class="app" src="${esc(d.thumb)}" alt="">` : OS.iconHTML(d.icon), sub: 'Shortcut', kind: 'Shortcut', open: d.open }; }
@@ -178,7 +178,10 @@
             </div>
             <aside class="pj-side">
               <div class="pj-card"><h4>Program details</h4>
-                <dl><dt>Status</dt><dd>${esc(p.status)}</dd><dt>Type</dt><dd>${esc(p.kindLabel || p.category)}</dd>${p.year ? `<dt>Built</dt><dd>${esc(p.year)}</dd>` : ''}${p.url ? `<dt>Address</dt><dd><a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(hostOf(p.url))}</a></dd>` : ''}</dl></div>
+                <dl><dt>Status</dt><dd>${esc(p.status)}</dd><dt>Type</dt><dd>${esc(p.kindLabel || p.category)}</dd>${p.year ? `<dt>Built</dt><dd>${esc(p.year)}</dd>` : ''}${p.url ? `<dt>Address</dt><dd><a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(hostOf(p.url))}</a></dd>` : ''}</dl>
+                ${p.device ? `<figure class="pj-device"><img src="${esc(p.device)}" alt="${esc(p.deviceCaption || p.name + ' on iPhone')}" loading="lazy"><figcaption>${esc(p.deviceCaption || 'On iPhone')}</figcaption></figure>` : ''}
+                ${p.url ? `<button class="vbtn primary pj-openweb">${ICON('globe')}<span>Open in web browser</span></button><a class="pj-newtab" href="${esc(p.url)}" target="_blank" rel="noopener">or open in a real tab ↗</a>` : `<div class="pj-nolink">${/internal|local/i.test(p.status) ? 'Runs on Daniel\'s Mac, so there\'s no public link. The video and screenshots show it in action.' : 'No public link yet.'}</div>`}
+              </div>
               ${(p.stack || []).length ? `<div class="pj-card"><h4>Built with</h4>${p.stack.map(s => `<span class="pill">${esc(s)}</span>`).join('')}</div>` : ''}
               ${p.fun_fact ? `<div class="pj-card tip-card"><h4>${ICON('info')} Did you know?</h4><p>${esc(p.fun_fact)}</p></div>` : ''}
             </aside>
@@ -186,6 +189,8 @@
         </div>
         <div class="statusbar"><span>${esc(p.status)}</span><span style="margin-left:auto">${esc(p.kindLabel || p.category)}</span></div>`;
       $('.pj-visit', win.body) && ($('.pj-visit', win.body).onclick = () => OS.open('browser', { url: p.url }));
+      $('.pj-openweb', win.body) && ($('.pj-openweb', win.body).onclick = () => OS.open('browser', { url: p.url }));
+      $('.pj-device img', win.body) && ($('.pj-device img', win.body).onclick = () => OS.open('photos', { src: p.device, only: slug }));
       $('.pj-play', win.body) && ($('.pj-play', win.body).onclick = () => OS.open('media', { src: vids[0].src }));
       $('.pj-gallery', win.body) && ($('.pj-gallery', win.body).onclick = () => OS.open('photos', { src: shots[0], only: slug }));
       const help = () => OS.alert(`${esc(p.name)} Help<br><br>Double-click things. Things open. That's the whole manual.`, 'info', 'Help');
@@ -385,27 +390,106 @@
   /* ======================================================================
      Notepad
      ====================================================================== */
+  /* ======================================================================
+     User documents: visitors create .txt files on the desktop (kept in their
+     browser) and can send any of them to Daniel.
+     ====================================================================== */
+  const FORM_URL = 'https://formsubmit.co/ajax/54084151bb7eebcd54f5f686ea7e731e';
+  const loadDocs = () => { try { return JSON.parse(localStorage.getItem('dv-docs') || '[]'); } catch (e) { return []; } };
+  let DOCS = loadDocs();
+  const saveDocs = () => { try { localStorage.setItem('dv-docs', JSON.stringify(DOCS)); } catch (e) { } };
+  const docById = (id) => DOCS.find(d => d.id === id);
+  const uniqueName = (base) => { let n = base + '.txt', k = 2; while (DOCS.some(d => d.name === n)) n = `${base} (${k++}).txt`; return n; };
+  OS.newTextDoc = ({ forDaniel = false } = {}) => {
+    const d = { id: 'd' + Date.now().toString(36) + Math.floor(Math.random() * 1e4), name: uniqueName(forDaniel ? 'Note for Daniel' : 'New Text Document'), text: forDaniel ? 'Hi Daniel,\n\n' : '', updated: Date.now(), forDaniel };
+    DOCS.push(d); saveDocs(); OS.refreshDesktop(); OS.sound.pop();
+    OS.open('notepad', { doc: d.id });
+    return d;
+  };
+  OS.deleteDoc = (id) => { const d = docById(id); if (!d) return; DOCS = DOCS.filter(x => x !== d); saveDocs(); DV.recycle.unshift({ name: d.name, sub: 'Deleted by you', icon: 'notepad', why: d.text.slice(0, 200) || '(empty)' }); updateBin(); OS.sound.recycle(); OS.wins.filter(w => w.key === 'notepad:' + id).forEach(w => w.close()); };
+  OS.prompt = (title, label, value, ok) => {
+    const win = OS.createWindow({ title, icon: ICON('notepad'), w: 360, h: 170, noMax: true, noMin: true, noResize: true });
+    win.isDialog = true;
+    win.body.innerHTML = `<div class="pad"><label style="display:block;margin-bottom:6px">${esc(label)}</label><input class="dlg-in" style="width:100%;height:24px;border:1px solid #7e95ad;padding:0 6px;font:inherit"></div><div class="dlg-bar"><button class="vbtn primary">OK</button><button class="vbtn">Cancel</button></div>`;
+    const inp = $('.dlg-in', win.body); inp.value = value || '';
+    const [okB, cancel] = $$('.dlg-bar .vbtn', win.body);
+    const go = () => { const v = inp.value.trim(); if (!v) return; win.close(); ok(v); };
+    okB.onclick = go; cancel.onclick = () => win.close(); inp.onkeydown = (e) => e.key === 'Enter' && go();
+    setTimeout(() => { inp.focus(); inp.select(); }, 60);
+  };
+  OS.renameDoc = (id) => { const d = docById(id); if (!d) return; OS.prompt('Rename', 'New name:', d.name, (v) => { d.name = /\.txt$/i.test(v) ? v : v + '.txt'; saveDocs(); OS.refreshDesktop(); OS.wins.filter(w => w.key === 'notepad:' + id).forEach(w => w.setTitle(d.name + ' - Notepad')); }); };
+
+  /* Delivers a message to Daniel's inbox. Resolves true on success. */
+  OS.sendToDaniel = async ({ subject, message, name, email }) => {
+    const body = { _subject: subject, name: name || 'Anonymous visitor', email: email || undefined, message, _template: 'table', _captcha: 'false', page: location.href };
+    if (email) body._replyto = email;
+    try {
+      const r = await fetch(FORM_URL, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(body) });
+      const j = await r.json().catch(() => ({}));
+      return r.ok && String(j.success) === 'true';
+    } catch (e) { return false; }
+  };
+  OS.sendDialog = ({ subject, message, onSent, title = 'Send to Daniel' }) => {
+    if (!message.trim()) { OS.alert('This note is empty. Write something first, then send it.', 'info', title); return; }
+    const win = OS.createWindow({ title, icon: ICON('mail'), w: 440, h: 300, noMax: true, noResize: true });
+    win.isDialog = true;
+    let who = {}; try { who = JSON.parse(localStorage.getItem('dv-who') || '{}'); } catch (e) { }
+    win.body.innerHTML = `<div class="pad send-dlg"><div class="send-head">${ICON('mail')}<div><b>Send this to Daniel's inbox</b><br><span class="muted">He reads every one. Add your email if you'd like a reply.</span></div></div>
+      <div class="m-fields" style="background:none;border:0;padding:8px 0"><label>Your name:</label><input class="s-name" placeholder="Optional"><label>Your email:</label><input class="s-email" type="email" placeholder="Optional, for a reply"></div>
+      <div class="send-prev selectable"></div><input class="s-hp" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true"></div>
+      <div class="dlg-bar"><span class="s-status muted"></span><button class="vbtn primary s-go">Send</button><button class="vbtn s-cancel">Cancel</button></div>`;
+    $('.s-name', win.body).value = who.name || ''; $('.s-email', win.body).value = who.email || '';
+    $('.send-prev', win.body).textContent = message.length > 400 ? message.slice(0, 400) + '…' : message;
+    $('.s-cancel', win.body).onclick = () => win.close();
+    $('.s-go', win.body).onclick = async () => {
+      if ($('.s-hp', win.body).value) { win.close(); return; }
+      const name = $('.s-name', win.body).value.trim(), email = $('.s-email', win.body).value.trim();
+      if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { $('.s-status', win.body).textContent = 'That email looks off.'; return; }
+      try { localStorage.setItem('dv-who', JSON.stringify({ name, email })); } catch (e) { }
+      const btn = $('.s-go', win.body); btn.disabled = true; $('.s-status', win.body).innerHTML = '<span class="spinner sm"></span> Sending…';
+      const ok = await OS.sendToDaniel({ subject, message, name, email });
+      if (ok) { win.close(); OS.sound.ding(); OS.balloon('Sent to Daniel', 'Your note is in his inbox. Thanks for stopping by!', { icon: 'mail' }); onSent && onSent(); }
+      else { btn.disabled = false; $('.s-status', win.body).innerHTML = `Couldn't send. <a href="mailto:${esc(DV.about.email)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}">Email it instead</a>`; }
+    };
+    setTimeout(() => $('.s-name', win.body).focus(), 60);
+  };
+
+  /* ======================================================================
+     Notepad
+     ====================================================================== */
   OS.register('notepad', {
     name: 'Notepad', icon: 'notepad', w: 620, h: 460,
-    title: (a) => (a.blank ? 'Untitled' : a.file === 'ideas' ? 'ideas-for-later.txt' : 'readme.txt') + ' - Notepad',
-    single: (a) => a.blank ? null : 'notepad:' + (a.file || 'readme'),
+    title: (a) => (a.doc ? (docById(a.doc)?.name || 'Untitled') : a.file === 'ideas' ? 'ideas-for-later.txt' : 'readme.txt') + ' - Notepad',
+    single: (a) => 'notepad:' + (a.doc || a.file || 'readme'),
     run(win, a) {
-      const text = a.blank ? '' : a.file === 'ideas' ? DV.notes.ideas : DV.notes.readme;
-      win.body.innerHTML = `<div class="menubar"><span>File</span><span>Edit</span><span>Format</span><span>View</span><span>Help</span></div><textarea class="np selectable" spellcheck="false" aria-label="Text"></textarea><div class="statusbar"><span class="np-pos">Ln 1, Col 1</span></div>`;
+      if (a.blank) { win.close(); OS.newTextDoc(); return; }
+      const doc = a.doc ? docById(a.doc) : null;
+      const text = doc ? doc.text : a.file === 'ideas' ? DV.notes.ideas : DV.notes.readme;
+      win.body.innerHTML = `<div class="menubar"><span>File</span><span>Edit</span><span>Format</span><span>View</span><span>Help</span></div><textarea class="np selectable" spellcheck="${doc ? 'true' : 'false'}" aria-label="Text" ${doc ? 'placeholder="Type anything. It saves automatically on this computer."' : ''}></textarea>
+        ${doc ? `<div class="np-bar"><span>${ICON('info')}<span class="np-saved">Saved on this computer.</span> Want Daniel to read it?</span><button class="vbtn primary np-send">${ICON('mail')} Send to Daniel</button></div>` : ''}
+        <div class="statusbar"><span class="np-pos">Ln 1, Col 1</span></div>`;
       const ta = $('textarea', win.body); ta.value = text;
       const pos = () => { const v = ta.value.slice(0, ta.selectionStart).split('\n'); $('.np-pos', win.body).textContent = `Ln ${v.length}, Col ${v[v.length - 1].length + 1}`; };
       ta.onkeyup = ta.onclick = pos;
+      let saveT;
+      const save = () => { if (!doc) return; doc.text = ta.value; doc.updated = Date.now(); saveDocs(); const sv = $('.np-saved', win.body); if (sv) sv.textContent = 'Saved on this computer.'; };
+      if (doc) {
+        ta.oninput = () => { $('.np-saved', win.body).textContent = 'Saving…'; clearTimeout(saveT); saveT = setTimeout(save, 400); };
+        win.onClose.push(save);
+        const send = () => { save(); OS.sendDialog({ subject: `Note from Daniel Vista: ${doc.name}`, message: doc.text, onSent: () => { doc.sentAt = Date.now(); saveDocs(); } }); };
+        $('.np-send', win.body).onclick = send; win.sendDoc = send;
+      }
       let statusOn = true;
+      const notSaved = () => OS.alert('This file is part of the portfolio, so it can\'t be changed. Right-click the desktop and choose <b>New &gt; Text Document</b> to write your own.', 'info', 'Notepad');
       const menus = {
-        File: () => [{ label: 'New', act: () => OS.open('notepad', { blank: true }) }, { label: 'Save', act: () => OS.alert('Your changes are saved… in your heart. (This is a portfolio, nothing is saved.)', 'info', 'Notepad') }, '-', { label: 'Exit', act: () => win.close() }],
-        Edit: () => [{ label: 'Select All', act: () => { ta.focus(); ta.select(); pos(); } }, { label: 'Time/Date', act: () => { ta.setRangeText(new Date().toLocaleString(), ta.selectionStart, ta.selectionEnd, 'end'); ta.focus(); pos(); } }],
+        File: () => [{ label: 'New', act: () => OS.newTextDoc() }, { label: 'Save', act: () => doc ? (save(), OS.balloon('Saved', `${esc(doc.name)} is saved on this computer.`)) : notSaved() }, ...(doc ? [{ label: 'Rename…', act: () => OS.renameDoc(doc.id) }, { label: '<b>Send to Daniel…</b>', icon: 'mail', act: () => win.sendDoc() }, '-', { label: 'Delete', act: () => OS.deleteDoc(doc.id) }] : []), '-', { label: 'Exit', act: () => win.close() }],
+        Edit: () => [{ label: 'Select All', act: () => { ta.focus(); ta.select(); pos(); } }, { label: 'Time/Date', act: () => { ta.setRangeText(new Date().toLocaleString(), ta.selectionStart, ta.selectionEnd, 'end'); ta.focus(); pos(); doc && ta.oninput(); } }],
         Format: () => [{ label: 'Word Wrap' + (ta.style.whiteSpace === 'pre' ? '' : ' ✓'), act: () => { ta.style.whiteSpace = ta.style.whiteSpace === 'pre' ? 'pre-wrap' : 'pre'; } }, { label: 'Font…' + (ta.classList.contains('np-big') ? ' (Large)' : ''), act: () => { ta.classList.toggle('np-big'); } }],
         View: () => [{ label: 'Status Bar' + (statusOn ? ' ✓' : ''), act: () => { statusOn = !statusOn; $('.statusbar', win.body).style.display = statusOn ? '' : 'none'; } }],
         Help: () => [{ label: 'About Notepad', act: () => OS.alert('Notepad<br>Version 6.0 (Build 6000)<br>© Daniel Ionashku. All feelings reserved.', 'info', 'About Notepad') }],
       };
       $$('.menubar span', win.body).forEach(s => s.onclick = () => { const r = s.getBoundingClientRect(); OS.menu(r.left, r.bottom, menus[s.textContent]()); });
-      // Open at the top of the file with the caret at Ln 1, Col 1 (the status bar's claim).
-      setTimeout(() => { ta.setSelectionRange(0, 0); ta.focus({ preventScroll: true }); ta.scrollTop = 0; pos(); }, 50);
+      setTimeout(() => { const at = doc ? ta.value.length : 0; ta.setSelectionRange(at, at); ta.focus({ preventScroll: true }); if (!doc) ta.scrollTop = 0; pos(); }, 50);
     },
   });
 
@@ -413,17 +497,24 @@
      Mail
      ====================================================================== */
   OS.register('mail', {
-    name: 'Mail', icon: 'mail', w: 620, h: 480, single: () => 'mail', title: 'New Message - Mail',
+    name: 'Mail', icon: 'mail', w: 620, h: 500, single: () => 'mail', title: 'New Message - Mail',
     run(win) {
       const A = DV.about;
-      win.body.innerHTML = `<div class="toolbar light"><button class="tb-btn m-send">✉ Send</button><span class="tb-sep" style="background:#b7c8da"></span>${A.links.map(l => `<a class="tb-btn" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)}</a>`).join('')}</div>
-        <div class="m-fields"><label>To:</label><input value="${esc(A.email ? A.name + ' <' + A.email + '>' : A.name)}" readonly><label>Subject:</label><input class="m-subj" placeholder="Let's build something" value="Hey Daniel, saw your Vista portfolio"></div>
+      let who = {}; try { who = JSON.parse(localStorage.getItem('dv-who') || '{}'); } catch (e) { }
+      win.body.innerHTML = `<div class="toolbar light"><button class="tb-btn m-send">${ICON('mail')} Send</button><span class="tb-sep" style="background:#b7c8da"></span>${A.links.map(l => `<a class="tb-btn" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)}</a>`).join('')}</div>
+        <div class="m-fields"><label>To:</label><input value="${esc(A.name)}" readonly><label>From:</label><input class="m-name" placeholder="Your name"><label>Reply to:</label><input class="m-email" type="email" placeholder="you@example.com (optional)"><label>Subject:</label><input class="m-subj" value="Hey Daniel, saw your Vista portfolio"></div>
         <textarea class="m-body selectable" placeholder="Write your message…">Hi Daniel,\n\n</textarea>
-        <div class="statusbar"><span>${A.email ? 'Opens in your email app' : 'Use the links above to reach Daniel'}</span></div>`;
-      $('.m-send', win.body).onclick = () => {
-        if (!A.email) { OS.alert('Reach Daniel through the links in the toolbar.', 'info', 'Mail'); return; }
-        location.href = `mailto:${A.email}?subject=${encodeURIComponent($('.m-subj', win.body).value)}&body=${encodeURIComponent($('.m-body', win.body).value)}`;
-        OS.balloon('Message handed off', 'Your email app should open with the message ready to send.');
+        <div class="statusbar"><span class="m-st">Goes straight to Daniel's inbox</span></div>`;
+      $('.m-name', win.body).value = who.name || ''; $('.m-email', win.body).value = who.email || '';
+      $('.m-send', win.body).onclick = async () => {
+        const msg = $('.m-body', win.body).value, name = $('.m-name', win.body).value.trim(), email = $('.m-email', win.body).value.trim();
+        if (msg.replace(/^Hi Daniel,\s*/, '').trim().length < 2) { OS.alert('Write a message first.', 'info', 'Mail'); return; }
+        if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { OS.alert('That reply-to email looks off.', 'info', 'Mail'); return; }
+        try { localStorage.setItem('dv-who', JSON.stringify({ name, email })); } catch (e) { }
+        $('.m-st', win.body).textContent = 'Sending…'; $('.m-send', win.body).disabled = true;
+        const ok = await OS.sendToDaniel({ subject: $('.m-subj', win.body).value || 'Message from Daniel Vista', message: msg, name, email });
+        if (ok) { win.close(); OS.sound.ding(); OS.balloon('Message sent', 'It\'s in Daniel\'s inbox. Thanks for reaching out!', { icon: 'mail' }); }
+        else { $('.m-send', win.body).disabled = false; $('.m-st', win.body).innerHTML = `Couldn't send. <a href="mailto:${esc(A.email)}">Email Daniel directly</a>`; }
       };
     },
   });
@@ -503,7 +594,7 @@
       render();
     },
   });
-  const updateBin = () => { const d = OS.desktopItems.find(x => x.id === 'recycle'); if (d) { d.icon = ICON('recycle', DV.recycle.length > 0); OS.renderDesktop(OS.desktopItems); } };
+  const updateBin = () => { const d = OS.desktopItems.find(x => x.id === 'recycle'); if (d) { d.icon = ICON('recycle', DV.recycle.length > 0); OS.refreshDesktop(); } };
 
   /* ======================================================================
      FIRE calculator (FIYR tie-in)
@@ -585,7 +676,7 @@
     { id: 'computer', label: 'Computer', icon: 'computer', open: () => OS.explore('Computer') },
     { id: 'projects', label: 'Projects', icon: 'folderStar', open: () => OS.explore('Projects') },
     { id: 'about', label: 'About Me.pdf', icon: ICON('doc', 'PDF'), open: () => OS.open('aboutme'), desc: 'Bio, photo, experience.' },
-    ...DV.desktop.map(s => P[s]).filter(Boolean).map(p => ({ id: p.slug, label: p.name, thumb: p.icon, icon: p.glyph || 'globe', shortcut: true, open: projOpen(p.slug), desc: p.tagline, menu: p.url ? [{ label: 'Visit ' + hostOf(p.url), act: () => OS.open('browser', { url: p.url }) }] : [] })),
+    ...DV.desktop.map(s => P[s]).filter(Boolean).map(p => ({ id: p.slug, label: p.name, thumb: p.icon, icon: p.glyph || 'globe', shortcut: true, open: projOpen(p.slug), desc: p.tagline, menu: p.url ? [{ label: 'Open in web browser', icon: 'globe', act: () => OS.open('browser', { url: p.url }) }] : [] })),
     { id: 'videos', label: 'Videos', icon: 'folderVideo', open: () => OS.explore('Videos') },
     { id: 'media', label: 'Media Player', icon: 'media', shortcut: true, open: () => OS.open('media') },
     { id: 'readme', label: 'readme.txt', icon: 'notepad', open: () => OS.open('notepad') },
@@ -593,8 +684,26 @@
     { id: 'cmd', label: 'Command Prompt', icon: 'cmd', shortcut: true, open: () => OS.open('cmd') },
     { id: 'calc', label: 'FIRE Calculator', icon: 'calc', shortcut: true, open: () => OS.open('calc') },
     { id: 'mail', label: 'Contact Me', icon: 'mail', shortcut: true, open: () => OS.open('mail') },
+    { id: 'note', label: 'Leave Daniel a note', icon: 'notepad', shortcut: true, open: () => OS.newTextDoc({ forDaniel: true }), desc: 'Write anything. It saves on this computer, and you can send it to Daniel.' },
     { id: 'recycle', label: 'Recycle Bin', icon: ICON('recycle', true), open: () => OS.open('recycle') },
   ];
+  const TYPE_RANK = { system: 0, folder: 1, project: 2, doc: 3, app: 4, user: 5 };
+  const typeOf = (d) => d.user ? 'user' : ['computer', 'recycle'].includes(d.id) ? 'system' : ['projects', 'videos'].includes(d.id) ? 'folder' : P[d.id] ? 'project' : ['about', 'readme'].includes(d.id) ? 'doc' : 'app';
+  try { OS.desktopSort = localStorage.getItem('dv-sort') || 'default'; } catch (e) { OS.desktopSort = 'default'; }
+  OS.refreshDesktop = () => {
+    let items = [...OS.desktopItems, ...DOCS.map(doc => ({ id: doc.id, user: true, label: doc.name, icon: 'notepad', updated: doc.updated, desc: 'A note you wrote. It lives in this browser until you send it.', open: () => OS.open('notepad', { doc: doc.id }),
+      menu: [{ label: '<b>Send to Daniel…</b>', icon: 'mail', act: () => OS.open('notepad', { doc: doc.id }).sendDoc?.() }, { label: 'Rename', act: () => OS.renameDoc(doc.id) }, { label: 'Delete', act: () => OS.deleteDoc(doc.id) }] }))];
+    const mode = OS.desktopSort;
+    if (mode === 'name') items.sort((a, b) => a.label.localeCompare(b.label));
+    else if (mode === 'type') items.sort((a, b) => TYPE_RANK[typeOf(a)] - TYPE_RANK[typeOf(b)] || a.label.localeCompare(b.label));
+    else if (mode === 'date') items.sort((a, b) => (b.updated || 0) - (a.updated || 0));
+    OS.renderDesktop(items);
+  };
+  OS.setDesktopSort = (v) => {
+    OS.desktopSort = v; try { localStorage.setItem('dv-sort', v); } catch (e) { }
+    const box = $('#icons'); box.classList.add('resorting');
+    setTimeout(() => { OS.refreshDesktop(); box.classList.remove('resorting'); }, 140);
+  };
   const appEntry = (p) => ({ label: p.name, sub: p.tagline, thumb: p.icon, icon: p.glyph || 'globe', pic: p.icon, open: projOpen(p.slug), keywords: [p.slug, p.category, p.description, (p.stack || []).join(' ')].join(' ') });
   OS.startConfig = {
     pinned: () => [
@@ -656,7 +765,7 @@
      Boot
      ====================================================================== */
   OS.buildShell();
-  OS.renderDesktop(OS.desktopItems);
+  OS.refreshDesktop();
   buildSidebar();
   OS.onFirstLogin = () => {
     const q = new URLSearchParams(location.search);

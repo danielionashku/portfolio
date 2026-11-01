@@ -11,7 +11,7 @@ projects = [r for r in rows if r['slug'] != 'about' and r['slug'] not in HIDDEN]
 SOT = 'assets/scroll-of-time/'
 
 OV = {
-  'fiyr': dict(theme='#0f6b4f', kindLabel='Personal finance app', year='2023–now'),
+  'fiyr': dict(theme='#0f6b4f', kindLabel='Personal finance app', year='2023–now', device='assets/fiyr/ios.png', deviceCaption='FIYR on iPhone (demo data)'),
   'lifegrid': dict(name='4160', theme='#1f2a44', kindLabel='Life planner app', year='2023–now'),
   'scroll-of-time': dict(theme='#6b4a1f', kindLabel='Interactive Bible history',
     videos=[dict(src=SOT+'tour.mp4', poster=SOT+'tour-poster.jpg', title="Scroll of Time tour: intro, timeline and Paul's first journey")]),
@@ -29,7 +29,7 @@ OV = {
   'symbis': dict(name='Counseling Dashboard', glyph='contact', theme='#7a2e46', kindLabel='Internal church tool',
     screenshots=['assets/symbis/dashboard.jpg','assets/symbis/couple.jpg']),  # fictional demo couples
   'kingdom-feud': dict(name='Kingdom Feud', glyph='game', theme='#8a1c1c', kindLabel='Church game-show night'),
-  'founders-realm': dict(glyph='castle', theme='#3d5a2a', kindLabel='3D game'),
+  'founders-realm': dict(glyph='castle', theme='#3d5a2a', kindLabel='3D game', status='Mac app (private build)', fun_fact='It took four tries: a static map, then a pixelated 2D canvas, then procedural three.js, and finally hand-placed CC0 art kits. Version four is the one that felt like a real kingdom.', videos_prepend=[dict(src='assets/founders-realm/teaser.mp4', poster='assets/founders-realm/teaser-poster.jpg', title="Founder's Realm teaser (0:46)")]),
   'power-dialer': dict(glyph='phone', theme='#14532d', kindLabel='Sales tool'),
   'mission-control': dict(glyph='dashboard', theme='#111827', kindLabel='Personal command center',
     screenshots=['assets/mission-control/terminals.jpg','assets/mission-control/automations.jpg']),  # seeded demo data
@@ -50,6 +50,7 @@ TEXT = [
 ]
 for p in projects:
     p.update(OV.get(p['slug'], {}))
+    if p.get('videos_prepend'): p['videos'] = p.pop('videos_prepend') + (p.get('videos') or [])
     for slug, field, old, new in TEXT:
         if p['slug'] != slug: continue
         v = p.get(field)

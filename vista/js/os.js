@@ -50,6 +50,7 @@
   const area = () => { const d = $('#desktop').getBoundingClientRect(); return { w: d.width, h: d.height }; };
 
   OS.createWindow = function (o) {
+    if (isMobile()) $$('.balloon').forEach(b => b.remove()); // balloons would sit on top of the maximized window's bottom bar
     if (o.key) { const ex = OS.wins.find(w => w.key === o.key); if (ex) { ex.restore(); ex.focus(); if (o.reuse) o.reuse(ex); return ex; } }
     const A = area();
     const w = Math.min(o.w || 720, A.w - 20), hgt = Math.min(o.h || 480, A.h - 20);
@@ -268,7 +269,7 @@
         const openSub = () => { clearTimeout(OS._subT); if (ci._sub?.isConnected) return; $$('.ctx.sub').forEach(s => s.remove()); const r = ci.getBoundingClientRect(); ci._sub = OS.menu(r.right - 2, r.top - 3, it.sub, true); ci._sub.addEventListener('mouseenter', () => clearTimeout(OS._subT)); };
         ci.addEventListener('mouseenter', openSub);
         ci.addEventListener('click', (e) => { e.stopPropagation(); openSub(); }); // touch has no hover
-      } else if (!isSub) ci.addEventListener('mouseenter', () => { clearTimeout(OS._subT); OS._subT = setTimeout(() => $$('.ctx.sub').forEach(s => s.remove()), 300); }); // grace period so a diagonal move into the submenu doesn't close it
+      } else if (!isSub) ci.addEventListener('mouseenter', () => { clearTimeout(OS._subT); OS._subT = setTimeout(() => $$('.ctx.sub').forEach(s => s.remove()), 550); }); // grace period so a diagonal move into the submenu doesn't close it
       m.appendChild(ci);
     });
     document.body.appendChild(m);
@@ -390,14 +391,24 @@
     // desktop interactions
     const desk = $('#desktop');
     desk.addEventListener('click', (e) => { if (e.target.closest('.dicon,.win,#sidebar')) return; $$('.dicon.sel').forEach(x => x.classList.remove('sel')); });
+    // Long-press on empty desktop opens the context menu on touch screens (iOS never fires contextmenu).
+    let lpT;
+    desk.addEventListener('touchstart', (e) => {
+      if (e.touches.length !== 1 || e.target.closest('.win,.dicon,#sidebar')) return;
+      const t = e.touches[0];
+      lpT = setTimeout(() => desk.dispatchEvent(new MouseEvent('contextmenu', { bubbles: true, cancelable: true, clientX: t.clientX, clientY: t.clientY })), 550);
+    }, { passive: true });
+    ['touchend', 'touchmove', 'touchcancel'].forEach(ev => desk.addEventListener(ev, () => clearTimeout(lpT), { passive: true }));
     desk.addEventListener('contextmenu', (e) => {
       if (e.target.closest('.win,.dicon')) return; e.preventDefault();
       OS.menu(e.clientX, e.clientY, [
         { label: 'View', sub: [['Large Icons', 1.35], ['Medium Icons', 1], ['Classic Icons', 0.75]].map(([label, v]) => ({ label: label + (OS.iconScale === v ? ' ✓' : ''), act: () => OS.setIconScale(v) })) },
-        { label: 'Sort By', sub: [{ label: 'Name', act: () => OS.renderDesktop(OS.desktopItems.slice().sort((a, b) => a.label.localeCompare(b.label))) }, { label: 'Default', act: () => OS.renderDesktop(OS.desktopItems) }] },
-        { label: 'Refresh', act: () => { $('#icons').style.opacity = 0; setTimeout(() => $('#icons').style.opacity = 1, 120); } },
+        { label: 'Sort By', sub: [['Name', 'name'], ['Type', 'type'], ['Date Modified', 'date'], ['Default', 'default']].map(([label, v]) => ({ label: label + ((OS.desktopSort || 'default') === v ? ' ✓' : ''), act: () => OS.setDesktopSort(v) })) },
+        { label: 'Show Gadgets' + ($('#sidebar').style.display === 'none' ? '' : ' ✓'), act: () => { const sb = $('#sidebar'); sb.style.display = sb.style.display === 'none' ? '' : 'none'; } },
+        { label: 'Refresh', act: () => { $('#icons').style.opacity = 0; setTimeout(() => $('#icons').style.opacity = 1, 150); } },
         '-',
-        { label: 'New', sub: [{ label: 'Folder', icon: 'folder', act: () => OS.alert('You can\'t create folders on someone else\'s portfolio. Nice try though.', 'info', 'New Folder') }, { label: 'Text Document', icon: 'notepad', act: () => OS.open('notepad', { blank: true }) }] },
+        { label: 'New', sub: [{ label: 'Text Document', icon: 'notepad', act: () => OS.newTextDoc() }, { label: 'Note for Daniel', icon: 'mail', act: () => OS.newTextDoc({ forDaniel: true }) }, '-', { label: 'Folder', icon: 'folder', act: () => OS.alert('You can\'t create folders on someone else\'s portfolio. Nice try though. A text document works, though!', 'info', 'New Folder') }] },
+        { label: '<b>Leave Daniel a note</b>', icon: 'mail', act: () => OS.newTextDoc({ forDaniel: true }) },
         '-',
         { label: 'Flip 3D', icon: 'flip', act: OS.flip3d },
         { label: 'Personalize', icon: 'paint', act: () => OS.open('personalize') },
